@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Folder from './components/Folder';
+import structure from './data/folderData';
+
+function renderTree(structure, level) {
+  console.log(`${"     ".repeat(level)} ${structure.name}`);
+  if (structure.isFolder) {
+    return structure.child.map((child) => renderTree(child, level + 1))
+  }
+}
+renderTree(structure, 0);
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Folder structure={structure} />
     </div>
   );
 }
